@@ -58,12 +58,12 @@ class UserController
         return $userDao->listarAction();
     }
 
-    public function listarClientAction(){
+   /* public function listarClientAction(){
 
         $clientDao = new ClienteDao();
         return $clientDao->listarAction();
     }
-
+*/
 
 
 
