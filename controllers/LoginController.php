@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include_once '../model/LoginModel.php';
 include_once '../dao/LoginDao.php';
 include_once '../model/LogModel.php';
@@ -63,11 +64,11 @@ class LoginController
     {
         $logModel = new LogModel();
         $logdao = new LogDao();
-        $session = new Session();
-        $logModel->setAcao("Usuario ".$session->get('Nome')." saiu do sistema");
-        $logModel->setUsuario($session->get('user'));
+
+        $logModel->setAcao("Usuario ".$logdao->getSession('Nome')." saiu do sistema");
+        $logModel->setUsuario($logdao->getSession('userID'));
         $logdao->insertLog($logModel);
-        $session->destroy();
+        $logdao->destroySession();
         $encoded = "<script>document.location='../index.php'</script>";
         echo $encoded;
     }

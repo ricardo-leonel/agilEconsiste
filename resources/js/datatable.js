@@ -333,6 +333,70 @@ $(document).ready(function() {
 		$('.dataTables_filter>label>input').addClass('form-control');
 	}
 
+	if($('table').hasClass('usuarioTable')){
+		//jQuery.fn.dataTableExt.oPagination.iFullNumbersShowPages = 3;
+		var clienteTable = $('.usuarioTable').dataTable( {
+			"bProcessing": true,
+			"sAjaxSource": "../../controllers/UserController.php",
+			"aoColumns": [
+				{ mData: 'Nome' } ,
+				{ mData: 'Usuario' },
+				{ mData: 'Email' },
+				{ mData: 'Ativo' },
+				{ mData: 'Ação' }
+			],
+			"sDom": "<'row'<'col-lg-4'l><'col-lg-4'T><'col-lg-4'f>r>t<'row'<'col-lg-4'i><'col-lg-4'i><'col-lg-4'p>>",
+			"oTableTools": {
+				"sSwfPath": "../resources/plugins/tables/dataTables/swf/copy_csv_xls_pdf.swf",
+				"aButtons": [
+					{
+						"sExtends": "copy",
+						"sButtonText": "Copiar",
+						"sToolTip": "Copiar tabela para Área de Transferência",
+						"sInfo": "<h6>Tabela copiada</h6><p>Tabela copiada para a Área de Transferência.</p>"
+					},
+					{
+						"sExtends": "print",
+						"sButtonText": "Imprimir",
+					},
+					{
+						"sExtends":    "collection",
+						"sButtonText": 'Salvar <span class="caret" />',
+						"aButtons":    [ "csv", "xls", "pdf" ]
+					}
+				]
+			},
+			"sPaginationType": "two_button",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"oLanguage": {
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ at&eacute _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",    "sInfoThousands": ".",
+				"sLengthMenu": "_MENU_",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "&Uacuteltimo"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+	}
+
 	// Set the classes that TableTools uses to something suitable for Bootstrap
 	$.extend( true, $.fn.DataTable.TableTools.classes, {
 		"container": "btn-group",

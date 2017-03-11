@@ -5,8 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if(empty($_SESSION['user'])){
 	header('Location: ../index.php?sessao=true');
 }
-include_once '../controllers/UserController.php';
-$_controller = new UserController();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -137,6 +136,7 @@ $_controller = new UserController();
 	<script type="text/javascript" src="../resources/js/main.js"></script>
 	<!-- Core js functions -->
 	<script type="text/javascript" src="../resources/js/datatable.js"></script>
+	<script type="text/javascript" src="../resources/js/functionUsuario.js"></script>
 	<!-- Init plugins only for page -->
 	<!-- Core js functions -->
 	<!-- Init plugins only for page -->
@@ -230,14 +230,6 @@ function CollapsedCancel(){
 													<div class="col-lg-4">
 														<select name="cliente" class="form-control">
 															<option selected="selected"></option>
-															<?php
-																$listaUsuario = $_controller->listarAction();
-																foreach ($listaUsuario as $value){
-
-																	echo "<option value='.$value[0][\"id\"].'>".$value[0]["nome"]."</option>";
-																}
-
-															?>
 														</select>
 													</div>
 												</div>
@@ -318,7 +310,7 @@ function CollapsedCancel(){
 										<div class="panel-body noPad clearfix" style="padding: 10px;">
 											<button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" onclick="Collapsed()">Novo</button>	
 											<table cellpadding="0" cellspacing="0" border="0"
-												class="tableTools display table table-bordered "
+												class="usuarioTable display table table-bordered "
 												width="100%">
 												<thead>
 													<tr>
@@ -330,32 +322,7 @@ function CollapsedCancel(){
 													</tr>
 												</thead>
 												<tbody>
-													<?php
-													$listaUsuario = $_controller->listarAction();
-													foreach ($listaUsuario as $value){
-														$status = "";
-														if($value[0]['status'] == 2)
-														{
-															$status = "<a class=\"icomoon-icon-checkmark\">";
-														}else{
-															$status = "<a class=\"icomoon-icon-close\">";
-														}
-														echo "<tr align=\"center\">";
-														echo "<td>".$value[0]["nome"]."</td>
-															<td>".$value[0]["usuario"]."</td>
-															<td>".$value[0]["email"]."</td>
-															<td>".$status."</a>
-															</td>
-															<td><a class=\"icomoon-icon-pencil-4\"></a> <a
-																class=\"brocco-icon-trashcan\"></a></td>";
-														echo "</tr>";
-													}
-
-													?>
-
-
-
-
+													
 												</tbody>
 											</table>
 										</div>

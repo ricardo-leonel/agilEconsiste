@@ -37,6 +37,10 @@ class UserController
             $this->alterarAction();
         }else if($_POST['acao'] == "remover"){
             $this->removerAction();
+        }else if($_POST['acao'] == "updateStatus"){
+            $this->updateStatus();
+        }else{
+            $this->listarAction();
         }
     }
 
@@ -55,7 +59,16 @@ class UserController
     public function listarAction(){
 
         $userDao = new UserDao();
-        return $userDao->listarAction();
+        $data = $userDao->listarAction();
+
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData"=>$data);
+
+
+        echo json_encode($results);
     }
 
    /* public function listarClientAction(){
@@ -64,6 +77,10 @@ class UserController
         return $clientDao->listarAction();
     }
 */
+    public function updateStatus(){
+        $userDao = new UserDao();
+        echo $userDao->updateStatus($_POST['id'],$_POST['status']);
+    }
 
 
 

@@ -56,5 +56,9 @@ abstract class Conexao {
         $this->sessao->set($key,$session);
     }
 
+    public function destroySession()
+    {
+        $this->sessao->destroy();
+    }
 }
 ?>
